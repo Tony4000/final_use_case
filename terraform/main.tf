@@ -1,11 +1,9 @@
 provider "aws" {
-  region = "east-us-2" # Or your desired AWS region
+  region = "east-us-2" 
 }
 
 resource "aws_s3_bucket" "static_website_bucket" {
-  bucket = "vishruth-bucket-unique-name" # Replace with a unique bucket name
-  # acl = "public-read" # Keep this commented out or removed as per previous fix
-
+  bucket = "vishruth-bucket-unique-name" 
   website {
     index_document = "index.html"
   }
@@ -16,18 +14,13 @@ resource "aws_s3_bucket" "static_website_bucket" {
   }
 }
 
-# --- Add this Block Public Access resource ---
 resource "aws_s3_bucket_public_access_block" "static_website_bucket_public_access_block" {
   bucket = aws_s3_bucket.static_website_bucket.id
-
-  # Set these to false to allow public policies for static website hosting
-  block_public_acls       = false # Not strictly needed for bucket policies, but good to set if you ever considered ACLs
+  block_public_acls       = false 
   block_public_policy     = false
-  ignore_public_acls      = false # Not strictly needed for bucket policies
+  ignore_public_acls      = false
   restrict_public_buckets = false
 }
-# --- End of Block Public Access resource ---
-
 
 resource "aws_s3_bucket_policy" "static_website_bucket_policy" {
   bucket = aws_s3_bucket.static_website_bucket.id
