@@ -1,5 +1,7 @@
 provider "aws" {
-  region = "us-east-2" 
+  region = "us-east-2"
+  access_key = AKIA5CBLQL5L7PXNX226
+  secret_key = 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
 }
 
 resource "aws_s3_bucket" "static_website_bucket" {
